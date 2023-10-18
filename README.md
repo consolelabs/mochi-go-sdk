@@ -4,6 +4,10 @@ The Mochi SDK for Go is a library that provides easy access to the Mochi API fro
 
 ## Features
 
+### Mochi Profile
+- [x] GetByDiscordID: Retrieve a Mochi profile by Discord ID.
+
+### Mochi Pay
 - [x] GetApplicationBalances: Retrieve token balances for your Mochi application.
 - [x] RequestPayment: Request a payment from a user.
 - [x] Transfer: Transfer tokens from your application to a list of user.
@@ -29,7 +33,7 @@ From MochiPay, you will receive an application ID, application name, and API key
 
 ## Examples
 Here's a simple example of how to use the YourAPI SDK:
-### `GetApplicationBalances()`
+### Mochi Pay
 ```go
 package main
 
@@ -61,3 +65,27 @@ func main() {
 
 ```
 
+### Mochi Profile
+```go
+package main
+
+import (
+	"fmt"
+
+	"github.com/consolelabs/mochi-go-sdk/mochiprofile"
+)
+
+func main() {
+	config := &mochiprofile.Config{}
+
+	client := mochiprofile.NewClient(config)
+	result, err := client.GetByDiscordID("797042642600722473")
+	if err != nil {
+		fmt.Printf("Error: %v\n", err)
+		return
+	}
+
+	fmt.Println("Profile:", result)
+}
+
+```
