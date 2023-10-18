@@ -1,0 +1,13 @@
+# OS:-
+.DS_Store
+
+# Editors:-
+.idea
+.vscode
+
+# Env:-
+.env
+.env.prod
+
+# Dependencies:-
+vendor
