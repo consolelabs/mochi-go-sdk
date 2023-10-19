@@ -8,7 +8,7 @@ The Mochi SDK for Go is a library that provides easy access to the Mochi API fro
 - [x] GetByDiscordID: Retrieve a Mochi profile by Discord ID.
 
 ### Mochi Pay
-- [x] GetApplicationBalances: Retrieve token balances for your Mochi application.
+- [x] GetAppBalance: Retrieve token balances for your Mochi application.
 - [x] RequestPayment: Request a payment from a user.
 - [x] Transfer: Transfer tokens from your application to a list of user.
 
@@ -40,18 +40,21 @@ package main
 import (
 	"fmt"
 
-	"github.com/consolelabs/mochi-go-sdk/mochipay"
+	"github.com/consolelabs/mochi-go-sdk/mochi"
+	"github.com/consolelabs/mochi-go-sdk/mochi/config"
 )
 
 func main() {
-	config := &mochipay.Config{
-		ApplicationID:   "<application-id>",
-		ApplicationName: "<application-name>",
-		APIKey:          "<api-key>",
+	config := &config.Config{
+		MochiPay: config.MochiPay{
+			ApplicationID:   "<application-id>",
+			ApplicationName: "<application-name>",
+			APIKey:          "<api-key>",
+		},
 	}
 
-	client := mochipay.NewClient(config)
-	balances, err := client.GetApplicationBalances()
+	client := mochi.NewClient(config)
+	balances, err := client.GetAppBalance()
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		return
@@ -63,6 +66,7 @@ func main() {
 	}
 }
 
+
 ```
 
 ### Mochi Profile
@@ -72,13 +76,14 @@ package main
 import (
 	"fmt"
 
-	"github.com/consolelabs/mochi-go-sdk/mochiprofile"
+	"github.com/consolelabs/mochi-go-sdk/mochi"
+	"github.com/consolelabs/mochi-go-sdk/mochi/config"
 )
 
 func main() {
-	config := &mochiprofile.Config{}
+	config := &config.Config{}
 
-	client := mochiprofile.NewClient(config)
+	client := mochi.NewClient(config)
 	result, err := client.GetByDiscordID("797042642600722473")
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
@@ -87,5 +92,6 @@ func main() {
 
 	fmt.Println("Profile:", result)
 }
+
 
 ```

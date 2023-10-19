@@ -1,4 +1,4 @@
-package mochipay
+package mochi
 
 import (
 	"bytes"
@@ -11,22 +11,28 @@ import (
 	"net/http"
 	"strconv"
 	"time"
+
+	"github.com/consolelabs/mochi-go-sdk/mochi/model"
 )
 
-func (c *Client) Transfer(req *TransferRequest) ([]TransactionResult, error) {
+func (c *Client) Transfer(req *model.TransferRequest) ([]model.Transaction, error) {
 	requestBody, err := json.Marshal(req)
 	if err != nil {
 		return nil, err
 	}
 
 	var client = &http.Client{}
-	request, err := http.NewRequest(http.MethodPost, fmt.Sprintf("%s/api/v1/applications/%v/transfer", c.cfg.BaseURL, c.cfg.ApplicationID), bytes.NewBuffer(requestBody))
+	request, err := http.NewRequest(http.MethodPost, fmt.Sprintf("%s/api/v1/applications/%v/transfer", c.cfg.MochiPay.BaseURL, c.cfg.MochiPay.ApplicationID), bytes.NewBuffer(requestBody))
 	if err != nil {
 		return nil, err
 	}
 
 	messageHeader := strconv.FormatInt(time.Now().Unix(), 10)
-	privateKey, err := hex.DecodeString(c.cfg.APIKey)
+	privateKey, err := hex.DecodeString(c.cfg.MochiPay.APIKey)
+	if err != nil {
+		return nil, errors.New("invalid API Key, error " + err.Error())
+	}
+
 	signature := ed25519.Sign(privateKey, []byte(messageHeader))
 	request.Header.Add("X-Message", messageHeader)
 	request.Header.Add("X-Application", "Guess Game")
@@ -44,14 +50,14 @@ func (c *Client) Transfer(req *TransferRequest) ([]TransactionResult, error) {
 	}
 
 	if resp.StatusCode != http.StatusOK {
-		var errMsg ErrorMessage
+		var errMsg model.ErrorMessage
 		if err := json.Unmarshal(resBody, &errMsg); err != nil {
 			return nil, errors.New("invalid decoded, error " + err.Error())
 		}
 		return nil, errors.New("invalid call, code " + strconv.Itoa(resp.StatusCode) + " " + errMsg.Msg)
 	}
 
-	var respData TransactionResponse
+	var respData model.TransactionResponse
 	if err := json.Unmarshal(resBody, &respData); err != nil {
 		return nil, errors.New("invalid decoded, error " + err.Error())
 	}

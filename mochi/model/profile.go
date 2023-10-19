@@ -1,15 +1,8 @@
-package mochiprofile
+package model
 
 import "time"
 
-type ErrorMessage struct {
-	Err        string `json:"err"`
-	Msg        string `json:"msg"`
-	StatusCode int    `json:"status_code"`
-	ErrorCode  string `json:"error_code_code"`
-}
-
-type ProfileResponse struct {
+type Profile struct {
 	ID                 string              `json:"id"`
 	CreatedAt          *time.Time          `json:"created_at"`
 	UpdatedAt          *time.Time          `json:"updated_at"`
