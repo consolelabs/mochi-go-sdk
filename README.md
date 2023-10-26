@@ -11,6 +11,8 @@ The Mochi SDK for Go is a library that provides easy access to the Mochi API fro
 - [x] GetAppBalance: Retrieve token balances for your Mochi application.
 - [x] RequestPayment: Request a payment from a user.
 - [x] Transfer: Transfer tokens from your application to a list of user.
+- [x] GetChains: Get the list of supported chain
+- [x] GetTokens: Get the list of token filtered by Chain and Symbol.
 
 ## Installation
 
@@ -20,6 +22,10 @@ To use the Mochi SDK in your Go project, you can simply install it using:
 go get github.com/consolelabs/mochi-go-sdk
 ```
 
+## Documentation
+[![Go Reference](https://pkg.go.dev/badge/github.com/bwmarrin/discordgo.svg)](https://pkg.go.dev/github.com/bwmarrin/discordgo)
+
+NOTICE: This library and the Mochi API are unfinished. Because of that there may be major changes to library in the future.
 
 ## Authorization
 From MochiPay, you will receive an application ID, application name, and API key. You can use these to create a new MochiPay client. The client will be used to make requests to the Mochi API.

@@ -7,3 +7,11 @@ type TokenBalanceResponses struct {
 type TransactionResponse struct {
 	Data []Transaction `json:"data"`
 }
+
+type TokensResponse struct {
+	Data []Token `json:"data"`
+}
+
+type ChainsResponse struct {
+	Data []Chain `json:"data"`
+}
