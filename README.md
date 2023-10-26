@@ -23,7 +23,7 @@ go get github.com/consolelabs/mochi-go-sdk
 ```
 
 ## Documentation
-[![Go Reference](https://pkg.go.dev/badge/github.com/bwmarrin/discordgo.svg)](https://pkg.go.dev/github.com/bwmarrin/discordgo)
+[![Go Reference](https://pkg.go.dev/badge/github.com/consolelabs/mochi-go-sdk/mochi.svg)](https://pkg.go.dev/github.com/consolelabs/mochi-go-sdk/mochi)
 
 NOTICE: This library and the Mochi API are unfinished. Because of that there may be major changes to library in the future.
 
