@@ -11,6 +11,8 @@ The Mochi SDK for Go is a library that provides easy access to the Mochi API fro
 - [x] GetAppBalance: Retrieve token balances for your Mochi application.
 - [x] RequestPayment: Request a payment from a user.
 - [x] Transfer: Transfer tokens from your application to a list of user.
+- [x] GetChains: Get the list of supported chain
+- [x] GetTokens: Get the list of token filtered by Chain and Symbol.
 
 ## Installation
 

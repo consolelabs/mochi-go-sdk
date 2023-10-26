@@ -17,7 +17,7 @@ func main() {
 	}
 
 	client := mochi.NewClient(config)
-	balances, err := client.GetAppBalance()
+	balances, err := client.GetChains()
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		return
@@ -25,6 +25,6 @@ func main() {
 
 	fmt.Println("Balances:")
 	for _, balance := range balances {
-		fmt.Printf("Token ID: %s, Amount: %s\n", balance.TokenID, balance.Amount)
+		fmt.Printf("Token ID: %s, Amount: %s\n", balance.ChainID, balance.Name)
 	}
 }
