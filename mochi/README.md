@@ -20,7 +20,7 @@ The Mochi SDK for Go is a library that provides easy access to the Mochi API fro
 To use the Mochi SDK in your Go project, you can simply install it using:
 
 ```bash
-go get github.com/consolelabs/mochi-go-sdk
+go get github.com/consolelabs/mochi-go-sdk/mochi
 ```
 
 ## Documentation
