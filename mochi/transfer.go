@@ -35,7 +35,7 @@ func (c *Client) Transfer(req *model.TransferRequest) ([]model.Transaction, erro
 
 	signature := ed25519.Sign(privateKey, []byte(messageHeader))
 	request.Header.Add("X-Message", messageHeader)
-	request.Header.Add("X-Application", "Guess Game")
+	request.Header.Add("X-Application", c.cfg.MochiPay.ApplicationName)
 	request.Header.Add("X-Signature", hex.EncodeToString(signature))
 
 	resp, err := client.Do(request)
