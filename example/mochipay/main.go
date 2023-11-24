@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/consolelabs/mochi-go-sdk/mochi"
 	"github.com/consolelabs/mochi-go-sdk/mochi/config"
@@ -10,14 +11,14 @@ import (
 func main() {
 	config := &config.Config{
 		MochiPay: config.MochiPay{
-			ApplicationID:   "<application-id>",
-			ApplicationName: "<application-name>",
-			APIKey:          "<api-key>",
+			ApplicationID:   os.Getenv("MOCHI_PAY_APPLICATION_ID"),
+			ApplicationName: os.Getenv("MOCHI_PAY_APPLICATION_NAME"),
+			APIKey:          os.Getenv("MOCHI_PAY_API_KEY"),
 		},
 	}
 
 	client := mochi.NewClient(config)
-	balances, err := client.GetChains()
+	balances, err := client.GetAppBalance()
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		return
@@ -25,6 +26,6 @@ func main() {
 
 	fmt.Println("Balances:")
 	for _, balance := range balances {
-		fmt.Printf("Token ID: %s, Amount: %s\n", balance.ChainID, balance.Name)
+		fmt.Printf("Token ID: %s, Amount: %s\n", balance.TokenID, balance.Amount)
 	}
 }
