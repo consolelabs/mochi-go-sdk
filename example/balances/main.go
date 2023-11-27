@@ -9,7 +9,7 @@ import (
 )
 
 func main() {
-	config := &config.Config{
+	cfg := &config.Config{
 		MochiPay: config.MochiPay{
 			ApplicationID:   os.Getenv("MOCHI_PAY_APPLICATION_ID"),
 			ApplicationName: os.Getenv("MOCHI_PAY_APPLICATION_NAME"),
@@ -17,7 +17,7 @@ func main() {
 		},
 	}
 
-	client := mochi.NewClient(config)
+	client := mochi.NewClient(cfg)
 	balances, err := client.GetAppBalance()
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)

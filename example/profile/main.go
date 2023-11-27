@@ -8,10 +8,10 @@ import (
 )
 
 func main() {
-	config := &config.Config{}
+	cfg := &config.Config{}
 
-	client := mochi.NewClient(config)
-	result, err := client.GetByDiscordID("797042642600722473")
+	client := mochi.NewClient(cfg)
+	result, err := client.GetByDiscordID("discord_id")
 	if err != nil {
 		fmt.Printf("Error: %v\n", err)
 		return
