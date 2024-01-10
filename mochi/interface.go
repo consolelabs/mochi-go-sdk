@@ -4,6 +4,7 @@ import "github.com/consolelabs/mochi-go-sdk/mochi/model"
 
 type APIClient interface {
 	GetByDiscordID(id string) (*model.Profile, error)
+	GetUserBalances(profileID string) ([]model.UserTokenBalance, error)
 
 	GetAppBalance() ([]model.TokenBalance, error)
 	RequestPayment(req *model.PaymentRequest) error
