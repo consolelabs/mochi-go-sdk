@@ -5,7 +5,6 @@ import (
 	"crypto/ed25519"
 	"encoding/hex"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io"
 	"net/http"
@@ -15,7 +14,7 @@ import (
 	"github.com/consolelabs/mochi-go-sdk/mochi/model"
 )
 
-func (c *Client) Transfer(req *model.TransferRequest) ([]model.Transaction, error) {
+func (c *Client) Transfer(req *model.TransferRequest) ([]model.TransferTransaction, error) {
 	requestBody, err := json.Marshal(req)
 	if err != nil {
 		return nil, err
@@ -30,7 +29,7 @@ func (c *Client) Transfer(req *model.TransferRequest) ([]model.Transaction, erro
 	messageHeader := strconv.FormatInt(time.Now().Unix(), 10)
 	privateKey, err := hex.DecodeString(c.cfg.MochiPay.APIKey)
 	if err != nil {
-		return nil, errors.New("invalid API Key, error " + err.Error())
+		return nil, fmt.Errorf("[Transfer] invalid API Key, error %v", err)
 	}
 
 	signature := ed25519.Sign(privateKey, []byte(messageHeader))
@@ -52,14 +51,14 @@ func (c *Client) Transfer(req *model.TransferRequest) ([]model.Transaction, erro
 	if resp.StatusCode != http.StatusOK {
 		var errMsg model.ErrorMessage
 		if err := json.Unmarshal(resBody, &errMsg); err != nil {
-			return nil, errors.New("invalid decoded, error " + err.Error())
+			return nil, fmt.Errorf("[Transfer] failed to decode error, error %v", err.Error())
 		}
-		return nil, errors.New("invalid call, code " + strconv.Itoa(resp.StatusCode) + " " + errMsg.Msg)
+		return nil, fmt.Errorf("[Transfer] failed to call , error %v", err.Error())
 	}
 
-	var respData model.TransactionResponse
+	var respData model.TransferTransactionResponse
 	if err := json.Unmarshal(resBody, &respData); err != nil {
-		return nil, errors.New("invalid decoded, error " + err.Error())
+		return nil, fmt.Errorf("[Transfer] failed to decode, error %v", err.Error())
 	}
 
 	return respData.Data, nil

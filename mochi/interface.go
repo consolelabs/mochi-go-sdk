@@ -8,7 +8,7 @@ type APIClient interface {
 
 	GetAppBalance() ([]model.TokenBalance, error)
 	RequestPayment(req *model.PaymentRequest) error
-	Transfer(req *model.TransferRequest) ([]model.Transaction, error)
+	Transfer(req *model.TransferRequest) ([]model.TransferTransaction, error)
 
 	GetTokens(req *model.GetTokenRequest) ([]model.Token, error)
 	GetChains() ([]model.Chain, error)

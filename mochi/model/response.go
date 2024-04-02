@@ -4,8 +4,8 @@ type TokenBalanceResponses struct {
 	Data []TokenBalance `json:"data"`
 }
 
-type TransactionResponse struct {
-	Data []Transaction `json:"data"`
+type TransferTransactionResponse struct {
+	Data []TransferTransaction `json:"data"`
 }
 
 type TokensResponse struct {

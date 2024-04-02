@@ -33,6 +33,6 @@ func main() {
 
 	fmt.Println("Transfer Transactions:")
 	for _, tx := range txs {
-		fmt.Printf("Transaction ID: %s, Amount: %s, Status: %s\n", tx.TransactionID, tx.Amount, tx.Status)
+		fmt.Printf("TransferTransaction ID: %s, Amount: %s, Status: %s\n", tx.TransactionID, tx.Amount, tx.Status)
 	}
 }
